@@ -1,0 +1,25 @@
+server: ${SERVER_IP}:${SERVER_PORTS}
+
+auth: "SecretHysteriaPassword123!"
+
+obfs:
+  type: salamander
+  salamander:
+    password: "ObfsPassword123!"
+
+tls:
+  insecure: true # به دلیل استفاده از IP مستقیم و احتمالا سرت سلف‌ساین
+  sni: canva.com # تنظیم دامنه به canva.com جهت فریب فایروال (SNI Spoofing)
+
+bandwidth:
+  up: 50 mbps
+  down: 50 mbps
+
+# تونل کردن ارتباط به روی Shadowsocks سرور
+tcpRelay:
+  listen: :${PORT}
+  remote: 127.0.0.1:8388
+
+udpRelay:
+  listen: :${PORT}
+  remote: 127.0.0.1:8388

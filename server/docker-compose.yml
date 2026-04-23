@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  # سادوشاکس به عنوان سرور پراکسی اصلی برای اتصال دستگاه‌های کلاینت (گوشی/سیستم)
+  shadowsocks:
+    image: shadowsocks/shadowsocks-libev
+    network_mode: host
+    restart: always
+    environment:
+      - SERVER_PORT=8388
+      - PASSWORD=StrongShadowsocksPass123!
+      - METHOD=aes-256-gcm
+
+  # سرور هستریا جهت تانل کردن و دور زدن فیلترینگ
+  hysteria:
+    image: tobyxdd/hysteria:v2
+    network_mode: host
+    restart: always
+    volumes:
+      - ./server.yaml:/etc/hysteria/server.yaml
+      - ./certs:/etc/hysteria/certs
+    # اضافه کردن فلگ --log-level debug برای خطایابی دقیق‌تر در سرور
+    command: ["server", "-c", "/etc/hysteria/server.yaml", "--log-level", "debug"]

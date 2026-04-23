@@ -1,0 +1,29 @@
+# پورت اصلی گوش دادن سرور
+listen: :36712
+
+tls:
+  cert: /etc/hysteria/certs/server.crt
+  key: /etc/hysteria/certs/server.key
+
+auth:
+  type: password
+  password: "SecretHysteriaPassword123!"
+
+# مخفی‌سازی دیتای پروتکل و دور زدن DPI فایروال (Salamander)
+obfs:
+  type: salamander
+  salamander:
+    password: "ObfsPassword123!"
+
+# پرش پورت (Port Hopping)
+# این بخش باعث می‌شود تا سرور به بازه وسیعی از پورت‌ها پاسخ دهد
+# نیاز به فعال‌سازی رول iptables در سرور دارد
+hopports:
+- 20000-50000
+
+# تنظیمات Masquerade (پوشش به عنوان یک وب‌سایت در صورت پینگ شدن از مرورگر)
+masquerade:
+  type: proxy
+  proxy:
+    url: https://canva.com
+    rewriteHost: true
