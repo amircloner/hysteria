@@ -7,8 +7,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 RUN apk add --no-cache gettext jq curl iptables
 
 # دریافت باینری Hysteria نسخه 2 با استفاده از پروکسی گیت‌هاب برای دور زدن تحریم‌ها
-RUN cu
-rl --retry 3 -Lo /usr/local/bin/hysteria https://ghproxy.com/https://github.com/apernet/hysteria/releases/latest/download/hysteria-linux-amd64 && \
+RUN curl --retry 3 -Lo /usr/local/bin/hysteria https://ghproxy.com/https://github.com/apernet/hysteria/releases/latest/download/hysteria-linux-amd64 && \
     chmod +x /usr/local/bin/hysteria
 
 
